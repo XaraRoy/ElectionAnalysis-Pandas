@@ -23,15 +23,23 @@ with open(bank_csv, newline="") as csvfile:
 #The total net amount of "Profit/Losses" over the entire period
     NetProfit = sum(list(bank_dict.values()))
 #The average change in "Profit/Losses" between months over the entire period
-#The greatest increase in profits (date and amount) over the entire period
+
+
+ #The greatest increase in profits (date and amount) over the entire period
    
 Greatest_increase_date =  max(bank_dict, key=bank_dict.get)
-
 Greatest_increase_profit = bank_dict[Greatest_increase_date]
 
 #The greatest decrease in losses (date and amount) over the entire period
+Greatest_decrease_date =  min(bank_dict, key=bank_dict.get)
+Greatest_decrease_profit = bank_dict[Greatest_decrease_date]
+
+
 #In addition, your final script should both print the analysis to the terminal and export a text file with the results.
 print(bank_dict)
 print(f"{month_count} total monthly entries")
 print(NetProfit)
 print(f"The greatest increase in profit occured in  {Greatest_increase_date} with a profit of {Greatest_increase_profit}")
+print(f"The greatest decrease in profit occured in  {Greatest_decrease_date} with a profit of {Greatest_decrease_profit}")
+
+print(deltas)
