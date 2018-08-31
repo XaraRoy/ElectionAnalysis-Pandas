@@ -26,18 +26,15 @@ month_count = len(bank_dict)
 #The total net amount of "Profit/Losses" over the entire period
 NetProfit = sum(list(bank_dict.values()))
 #The average change in "Profit/Losses" between months over the entire period
-# profit_change = []
-# x = 0
-# for value in bank_dict.values():
-#     if value != x:
-#         y = value
-#         profit_change.append(x-y)
-#     x =value
-# profit_change.pop(0)
-# Delta_Avg = np.mean(profit_change)
-profit_change = [bank_dict.values()]
-profit_change2 = it.accumulate(profit_change)
-Delta_Avg2 = np.mean(profit_change2)
+profit_change = []
+x = 0
+for value in bank_dict.values():
+    if value != x:
+        y = value
+        profit_change.append(x-y)
+    x =value
+profit_change.pop(0)
+Delta_Avg = np.mean(profit_change)
 
  #The greatest increase in profits (date and amount) over the entire period
    
@@ -55,7 +52,5 @@ print(f"{month_count} total monthly entries")
 print(NetProfit)
 print(f"The greatest increase in profit occured in  {Greatest_increase_date} with a profit of {Greatest_increase_profit}")
 print(f"The greatest decrease in profit occured in  {Greatest_decrease_date} with a profit of {Greatest_decrease_profit}")
-#print(profit_change)
-#print(Delta_Avg)
-print(profit_change2)
-print(Delta_Avg2)
+print(profit_change)
+print(Delta_Avg)
