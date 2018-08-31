@@ -1,0 +1,10 @@
+
+Financial Analysis
+
+----------------------------
+86 total monthly entries
+The net profit for this period was 38382578
+The greatest increase in profit occured in  Feb-2012 with a profit of 1170593
+The greatest decrease in profit occured in  Sep-2013 with a profit of -1196225
+The Average profit change was 567769.2588235295
+----------------------------
