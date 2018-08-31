@@ -4,18 +4,18 @@ import os
 import numpy as np
 
 
-
-
 #declare path of Data
 bank_csv = os.path.join("..\Resources\Budget_data.csv")
+
 #open data file as CSV, splitting month-year and Profit
 with open(bank_csv, newline="") as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=",")
-#making a new dictionary to hold that info
-    bank_dict = {}
+
 #Skipping header 
     next(csv_reader, None)
-#Filling Dictionary with Month as Key, profit as value
+#making a new dictionary to hold budget data
+    bank_dict = {}
+#Filling Dictionary with Month as Key, Profit/Losses as value
     for row in csv_reader:
         month = row[0]
         profit = int(row[1])
@@ -24,23 +24,23 @@ with open(bank_csv, newline="") as csvfile:
 #The total number of months included in the dataset
 month_count = len(bank_dict)
 
-#The total net amount of "Profit/Losses" over the entire period
+#The total of "Profit/Losses" over the entire period
 NetProfit = sum(list(bank_dict.values()))
 
 #The average change in "Profit/Losses" between months over the entire period
-
+#Filling a List with change in Values
 profit_change = []
 x = 0
 for value in bank_dict.values():
-    if value != x:
-        y = value
-        profit_change.append(abs(x-y))
+    y = value
+    profit_change.append(abs(x-y))  #Need to use absoulute value to find the $ amount in or out
     x =value
+
+#Removing the initial value from our list
 profit_change.pop(0)
 Delta_Avg = np.mean(profit_change)
 
  #The greatest increase in profits (date and amount) over the entire period
-   
 Greatest_increase_date =  max(bank_dict, key=bank_dict.get)
 Greatest_increase_profit = bank_dict[Greatest_increase_date]
 
@@ -49,7 +49,6 @@ Greatest_decrease_date =  min(bank_dict, key=bank_dict.get)
 Greatest_decrease_profit = bank_dict[Greatest_decrease_date]
 
 #In addition, your final script should both print the analysis to the terminal and export a text file with the results.
-
 print(f"\n----------------------------\n")
 print(f"Here is a list of the data\n{bank_dict}\n\n")
 print(f"List of profit changes is,{profit_change}\n\n")
