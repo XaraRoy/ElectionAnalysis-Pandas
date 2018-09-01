@@ -17,9 +17,7 @@ with open(bank_csv, newline="") as csvfile:
     bank_dict = {}
 #Filling Dictionary with Month as Key, Profit/Losses as value
     for row in csv_reader:
-        month = row[0]
-        profit = int(row[1])
-        bank_dict[month] = profit
+        bank_dict[row[0]] = int(row[1])
 
 #The total number of months included in the dataset
 month_count = len(bank_dict)
