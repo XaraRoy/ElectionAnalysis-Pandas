@@ -13,19 +13,46 @@ with open(poll_csv, newline="") as csvfile:
 #Skipping header 
     next(csv_reader, None)
 
-    voters = []
+    counties_d = {}
     counties = []
     candidates = []
-
-#Filling Dictionary with Month as Key, Profit/Losses as value
+    candidates_d = {}
+    
+#Making Lists from dataset
     for row in csv_reader:
-       voters.append(row[0])
        counties.append(row[1])
        candidates.append(row[2])
-            
-print(len(voters))
-print(len(counties))
-print(len(candidates))
+       counties_d.setdefault(row[1], 0)
+       candidates_d.setdefault(row[2],counties_d)
+       zipped = zip(candidates, counties)
+       for (x,y) in zipped:
+           
+           candidates_d[x] = counties_d[y] += 1
+           counties_d.clear()
+
+
+
+        
+        
+       
+
+               
+    
+
+    # Results_Dict= {
+    #     Canidate1 : { County 1 : Vote_count, County 2: Vote Count ...
+    #     Canidate2 : { County 1 : Vote_count, County 2: Vote Count ...
+    #     }
+    # }
+
+
+
+
+    print(candidates_d)
+    print(zipped)
+    print(len(counties))
+    print(len(candidates))
+    
 #The total number of votes cast
 #A complete list of candidates who received votes
 #The percentage of votes each candidate won
