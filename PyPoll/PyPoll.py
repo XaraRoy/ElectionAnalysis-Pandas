@@ -25,10 +25,16 @@ with open(poll_csv, newline="") as csvfile:
        counties_d.setdefault(row[1], 0)
        candidates_d.setdefault(row[2],counties_d)
 
-       
-    zipped = zip(candidates, counties)
-    print(Counter(zipped).keys())
-    print(Counter(zipped).values())
+      
+zipped = zip(candidates, counties)
+c = Counter(zipped)
+for i in candidates_d.keys():
+    for n in counties_d.keys():
+        x = c[i, n]
+        counties_d[n] = x
+    candidates_d[i] = counties_d
+    counties_d.clear
+    
     # candidates_d[canidates] = {counties_d[val2], count}
 
     
