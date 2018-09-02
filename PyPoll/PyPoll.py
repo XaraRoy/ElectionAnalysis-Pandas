@@ -1,7 +1,7 @@
 #Import CSV AND INIT
 
 import os
-import numpy as np
+from collections import Counter
 import csv
 
 #declare path of Data
@@ -24,11 +24,14 @@ with open(poll_csv, newline="") as csvfile:
        candidates.append(row[2])
        counties_d.setdefault(row[1], 0)
        candidates_d.setdefault(row[2],counties_d)
-       zipped = zip(candidates, counties)
-       for (x,y) in zipped:
-           
-           candidates_d[x] = counties_d[y] += 1
-           counties_d.clear()
+
+       
+    zipped = zip(candidates, counties)
+    print(Counter(zipped).keys())
+    print(Counter(zipped).values())
+    # candidates_d[canidates] = {counties_d[val2], count}
+
+    
 
 
 
@@ -49,9 +52,8 @@ with open(poll_csv, newline="") as csvfile:
 
 
     print(candidates_d)
-    print(zipped)
     print(len(counties))
-    print(len(candidates))
+
     
 #The total number of votes cast
 #A complete list of candidates who received votes
