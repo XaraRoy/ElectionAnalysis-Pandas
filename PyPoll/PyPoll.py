@@ -12,8 +12,9 @@ counties = []
 results = {}
 totals = {}
 Winner_Votes = 0
+    
 
-totals_d = {"Total Votes" : 0, "Percentage Won" : 0}         
+
 #declare path of Data
 poll_csv = os.path.join("..\Resources\election_data.csv")
 # Importing Files
@@ -25,21 +26,21 @@ with open(poll_csv, newline="") as csvfile:
        counties.append(row[1])
        candidates.append(row[2])
        counties_d.setdefault(row[1], 0)
-       
 
+
+totals_d = {"Total Votes" : 0, "Percentage Won" : 0}           
 counties_d.update(totals_d)  
 
-
 zipped =  zip(candidates, counties)
+
+#Count the votes
 counted = Counter(zipped)
-
-
-    
 for (x, y) in sorted(counted):
     if not x in results.keys():          
         results[x] = copy.deepcopy(counties_d)
     results[x][y] = counted[x, y]
-print(results)
+
+#Find the Winners
 for x in results.keys():
     results[x]["Total Votes"] = sum(results[x].values())
     results[x]["Percentage Won"] = results[x]["Total Votes"] / len(counties) * 100
@@ -49,18 +50,10 @@ for x in results.keys():
         Winner = x
     totals[x] = results[x]["Total Votes"]
 
-
 #The total number of votes cast
 #A complete list of candidates who received votes
 #The total number of votes each candidate won
-
 #The winner of the election based on popular vote.
-
-
-
-
-
-
 #print the analysis to the terminal and export a text file with the results.
 print(f"\n----------------------------")
 print(f"Here is a Summary of the Election")
@@ -108,20 +101,22 @@ for c in counties_d.keys():
   
     output = ( f"Voting summary {c} county.\n\n")
     file.write(output)
+    
     for n in results.keys():
         County_Total += results[n][c]
+        
         output =(f" {n} had {results[n][c]} votes\n")
         file.write(output)
+        
         if results[n][c] > County_Votes:
            County_Votes = results[n][c]
            County_Percent = County_Votes / County_Total * 100
            County_winner = n
         
     output = (    
-    f"\n\nThere were {County_Total} votes in {c} county this year"
+    f"\n\nThere were {County_Total} votes in {c} county this year\n"
     f"The winner of {c} county is {County_winner} with {County_Votes} votes or {'{:04.2f}'.format(County_Percent)}%\n"
     f"----------------------------\n\n")
     file.write(output)
 
-file.write(output)
 file.close()
